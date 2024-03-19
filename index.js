@@ -58,6 +58,21 @@ db.connect()
   );
   
 
+//TODO: Create a post and fetch route
+
+
+app.get('/', (req, res) => {
+  try {
+    res.json({ message: 'Welcome to Residentron' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+);
+
+app.use((req, res) => {
+  res.status(404).json({ message: 'Resource not found' });
+});
 
 
 app.listen(port, () => {
