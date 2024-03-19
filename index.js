@@ -1,28 +1,62 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+import pg from 'pg';
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
-// app.js
-mongoose.connect('mongodb://localhost:27017/residentron', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+
+const db = new pg.Client({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'Residentron',
+  password: 'root',
+  port: 5432,
 });
 
-const db = mongoose.connection;
+db.connect()
+  .then(() => console.log('Connected to the database'))
+  .catch(err => console.error('Error connecting to the database', err.stack));
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB');
-});
+  app.get('/api/v1/residents', (req, res) => {
+    db.query('SELECT * FROM residents', (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json(results.rows);
+    });
+  }
+  );
 
-const userRoutes = require('./routes/User');
+  app.get('/api/v1/residents/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+  
+    db.query('SELECT * FROM residents WHERE id = $1', [id], (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(200).json(results.rows);
+    });
+  }
+  );
 
-app.use('/users', userRoutes);
+  app.post('/api/v1/residents', (req, res) => {
+    const { name, email } = req.body;
+  
+    db.query('INSERT INTO residents (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
+      if (error) {
+        throw error;
+      }
+      res.status(201).send(`Resident added with ID: ${results.insertId}`);
+    });
+  }
+  );
+  
 
 
 
