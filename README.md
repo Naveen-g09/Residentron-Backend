@@ -1,11 +1,21 @@
+Here's the updated README.md file with all the features and details included:
+
+```markdown
 # Residentron-Backend
 
 This is the backend for the Residentron project, an integrated housing society app for managing users and community-related activities.
 
 ## Features
 
--
-- ...
+- User authentication (registration, login, logout)
+- Profile management (create, update, delete)
+- Transaction management
+- Utility management
+- Amenity booking
+- Service subscription
+- Repair service request
+- Visitor management
+- Event scheduling
 
 ## Getting Started
 
@@ -39,8 +49,10 @@ Start the server:
 
 ```bash
 npm start
+```
 
-### Tech Stack(Probably)
+### Tech Stack
+
 1. Postgres
 2. Express
 3. DAPR
@@ -52,8 +64,7 @@ npm start
 
 ---
 
-![image](https://github.com/Naveen-g09/Residentron-Backend/assets/76151123/688061b0-e828-492a-bc08-ff0e62241f0c)
-
+![ER Diagram](https://github.com/Naveen-g09/Residentron-Backend/assets/76151123/688061b0-e828-492a-bc08-ff0e62241f0c)
 
 ---
 
@@ -140,61 +151,65 @@ erDiagram
     datetime updatedAt
   }
 ```
----
-
-APIS
 
 ---
 
-- Welcome Message: http://localhost/
+## APIS
+
+---
+
+- Welcome Message: residentron/
 - Authentication Endpoints:
-  - POST: http://localhost/auth
-  - GET (by username): http://localhost/auth/:username
-  - GET (by email): http://localhost/auth/email/:email
-  - PUT: http://localhost/auth/:username
-  - DELETE: http://localhost/auth/:username
+  - POST: residentron/auth
+  - GET (by username): residentron/auth/:username
+  - GET (by email): residentron/auth/email/:email
+  - PUT: residentron/auth/:username
+  - DELETE: residentron/auth/:username
 - Profile Endpoints:
-  - POST: http://localhost/profile
-  - GET (by email): http://localhost/profile/:email
-  - GET (by id): http://localhost/profile/id/:id
-  - PUT: http://localhost/profile/:id
-  - DELETE: http://localhost/profile/:id
+  - POST: residentron/profile
+  - GET (by email): residentron/profile/:email
+  - GET (by id): residentron/profile/id/:id
+  - PUT: residentron/profile/:id
+  - DELETE: residentron/profile/:id
 - Transaction Endpoints:
-  - POST: http://localhost/transaction
-  - GET (by profileId): http://localhost/transaction/:profileId
-  - PUT: http://localhost/transaction/:transactionId
-  - DELETE: http://localhost/transaction/:transactionId
+  - POST: residentron/transaction
+  - GET (by profileId): residentron/transaction/:profileId
+  - PUT: residentron/transaction/:transactionId
+  - DELETE: residentron/transaction/:transactionId
 - Utility Endpoints:
-  - POST: http://localhost/utility
-  - GET (by profileId): http://localhost/utility/:profileId
-  - PUT: http://localhost/utility/:utilityId
-  - DELETE: http://localhost/utility/:utilityId
+  - POST: residentron/utility
+  - GET (by profileId): residentron/utility/:profileId
+  - PUT: residentron/utility/:utilityId
+  - DELETE: residentron/utility/:utilityId
 - Amenity Endpoints:
-  - POST: http://localhost/amenity
-  - GET (by profileId): http://localhost/amenity/:profileId
-  - PUT: http://localhost/amenity/:amenityId
-  - DELETE: http://localhost/amenity/:amenityId
+  - POST: residentron/amenity
+  - GET (by profileId): residentron/amenity/:profileId
+  - PUT: residentron/amenity/:amenityId
+  - DELETE: residentron/amenity/:amenityId
 - Service Endpoints:
-  - POST: http://localhost/service
-  - GET (by profileId): http://localhost/service/:profileId
-  - PUT: http://localhost/service/:serviceId
-  - DELETE: http://localhost/service/:serviceId
+  - POST: residentron/service
+  - GET (by profileId): residentron/service/:profileId
+  - PUT: residentron/service/:serviceId
+  - DELETE: residentron/service/:serviceId
 - Repair Endpoints:
-  - POST: http://localhost/repair
-  - GET (by profileId): http://localhost/repair/:profileId
-  - PUT: http://localhost/repair/:repairId
-  - DELETE: http://localhost/repair/:repairId
+  - POST: residentron/repair
+  - GET (by profileId): https://96b5-103-136-175-206
+
+.ngrok-free.app/repair/:profileId
+  - PUT: residentron/repair/:repairId
+  - DELETE: residentron/repair/:repairId
 - Visitor Endpoints:
-  - POST: http://localhost/visitor
-  - GET (by profileId): http://localhost/visitor/:profileId
-  - PUT: http://localhost/visitor/:visitorId
-  - DELETE: http://localhost/visitor/:visitorId
+  - POST: residentron/visitor
+  - GET (by profileId): residentron/visitor/:profileId
+  - PUT: residentron/visitor/:visitorId
+  - DELETE: residentron/visitor/:visitorId
 - Events Endpoints:
-  - POST: http://localhost/events
-  - GET (by profileId): http://localhost/events/:profileId
-  - PUT: http://localhost/events/:eventId
-  - DELETE: http://localhost/events/:eventId
+  - POST: residentron/events
+  - GET (by profileId): residentron/events/:profileId
+  - PUT: residentron/events/:eventId
+  - DELETE: residentron/events/:eventId
+```
 
-
-in the place of  lcoalhost use this url: https://96b5-103-136-175-206.ngrok-free.app/
+Replace `residentron/` with the actual URL where your backend server is hosted.
+In the place of residentron use this url: https://96b5-103-136-175-206.ngrok-free.app
 
