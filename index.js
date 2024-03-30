@@ -1,78 +1,317 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-import pg from 'pg';
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
+const pg = require('pg');
+const cors = require('cors'); // Corrected import
 
 const app = express();
 const port = process.env.PORT || 3000;
-
+const auth = require('./tables/auth');
+const profile = require('./tables/profile');
+const transaction = require('./tables/transaction');
+const utility = require('./tables/utility');
+const amenity = require('./tables/amenity');
+const service = require('./tables/service');
+const repair = require('./tables/repair');
+const visitor = require('./tables/visitor');
+const events = require('./tables/events');
 app.use(bodyParser.json());
+app.use(cors()); // Added CORS middleware
 
-
-const db = new pg.Client({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'Residentron',
-  password: 'root',
-  port: 5432,
-});
+const db = require('./db');
 
 db.connect()
   .then(() => console.log('Connected to the database'))
   .catch(err => console.error('Error connecting to the database', err.stack));
 
-  app.get('/api/v1/residents', (req, res) => {
-    db.query('SELECT * FROM residents', (error, results) => {
-      if (error) {
-        throw error;
-      }
-      res.status(200).json(results.rows);
-    });
-  }
-  );
-
-  app.get('/api/v1/residents/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-  
-    db.query('SELECT * FROM residents WHERE id = $1', [id], (error, results) => {
-      if (error) {
-        throw error;
-      }
-      res.status(200).json(results.rows);
-    });
-  }
-  );
-
-  app.post('/api/v1/residents', (req, res) => {
-    const { name, email } = req.body;
-  
-    db.query('INSERT INTO residents (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
-      if (error) {
-        throw error;
-      }
-      res.status(201).send(`Resident added with ID: ${results.insertId}`);
-    });
-  }
-  );
-  
-
-//TODO: Create a post and fetch route
-
+  // Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Internal server error' });
+});
 
 app.get('/', (req, res) => {
-  try {
-    res.json({ message: 'Welcome to Residentron' });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+  res.send('Welcome to Residentron API');
 }
 );
 
-app.use((req, res) => {
-  res.status(404).json({ message: 'Resource not found' });
+// Auth
+app.post('/auth', async (req, res) => {
+  const { username, password, email } = req.body;
+  const user = await auth.createUser(username, password, email);
+  res.json(user);
 });
+
+app.get('/auth/:username', async (req, res) => {
+  const { username } = req.params;
+  const user = await auth.getUserByUsername(username);
+  res.json(user);
+}
+);
+
+app.get('/auth/email/:email', async (req, res) => {
+  const { email } = req.params;
+  const user = await auth.getUserByEmail(email);
+  res.json(user);
+}
+);
+
+app.put('/auth/:username', async (req, res) => {
+  const { username } = req.params;
+  const { password } = req.body;
+  const user = await auth.updateUserPassword(username, password);
+  res.json(user);
+}
+);
+
+app.delete('/auth/:username', async (req, res) => {
+  const { username } = req.params;
+  await auth.deleteUser(username);
+  res.json({ message: 'User deleted successfully' });
+}
+);
+
+// Profile
+app.post('/profile', async (req, res) => {
+  const { name, email, password, phoneNumber } = req.body;
+  const user = await profile.createProfile(name, email, password, phoneNumber);
+  res.json(user);
+});
+
+app.get('/profile/:email', async (req, res) => {
+  const { email } = req.params;
+  const user = await profile.getProfileByEmail(email);
+  res.json(user);
+}
+);
+
+app.get('/profile/id/:id', async (req, res) => {
+  const { id } = req.params;
+  const user = await profile.getProfileById(id);
+  res.json(user);
+}
+);
+
+app.put('/profile/:id', async (req, res) => {
+  const { id } = req.params;
+  const { name, email, password, phoneNumber } = req.body;
+  const user = await profile.updateProfile(id, { name, email, password, phoneNumber });
+  res.json(user);
+}
+);
+
+app.delete('/profile/:id', async (req, res) => {
+  const { id } = req.params;
+  await profile.deleteProfile(id);
+  res.json({ message: 'Profile deleted successfully' });
+}
+);
+
+// Transaction
+app.post('/transaction', async (req, res) => {
+  const { profileId, amount, type } = req.body;
+  const transaction = await transaction.createTransaction(profileId, amount, type);
+  res.json(transaction);
+});
+
+app.get('/transaction/:profileId', async (req, res) => {
+  const { profileId } = req.params;
+  const transactions = await transaction.getTransactionsByProfileId(profileId);
+  res.json(transactions);
+}
+);
+
+app.put('/transaction/:transactionId', async (req, res) => {
+  const { transactionId } = req.params;
+  const { amount } = req.body;
+  const transaction = await transaction.updateTransactionAmount(transactionId, amount);
+  res.json(transaction);
+}
+);
+
+app.delete('/transaction/:transactionId', async (req, res) => {
+  const { transactionId } = req.params;
+  await transaction.deleteTransaction(transactionId);
+  res.json({ message: 'Transaction deleted successfully' });
+}
+);
+
+// Utility
+app.post('/utility', async (req, res) => {
+  const { profileId, utilityId, usedDate, name } = req.body;
+  const utility = await utility.createUtility(profileId, utilityId, usedDate, name);
+  res.json(utility);
+});
+
+app.get('/utility/:profileId', async (req, res) => {
+  const { profileId } = req.params;
+  const utilities = await utility.getUtilitiesByProfileId(profileId);
+  res.json(utilities);
+}
+);
+
+app.put('/utility/:utilityId', async (req, res) => {
+  const { utilityId } = req.params;
+  const { name, usedDate } = req.body;
+  const utility = await utility.updateUtility(utilityId, { name, usedDate });
+  res.json(utility);
+}
+);
+
+app.delete('/utility/:utilityId', async (req, res) => {
+  const { utilityId } = req.params;
+  await utility.deleteUtility(utilityId);
+  res.json({ message: 'Utility deleted successfully' });
+}
+);
+
+// Amenity
+app.post('/amenity', async (req, res) => {
+  const { profileId, amenityId, name, usedDate } = req.body;
+  const amenity = await amenity.createAmenity(profileId, amenityId, name, usedDate);
+  res.json(amenity);
+});
+
+app.get('/amenity/:profileId', async (req, res) => {
+  const { profileId } = req.params;
+  const amenities = await amenity.getAmenitiesByProfileId(profileId);
+  res.json(amenities);
+}
+);
+
+app.put('/amenity/:amenityId', async (req, res) => {
+  const { amenityId } = req.params;
+  const { name, usedDate } = req.body;
+  const amenity = await amenity.updateAmenity(amenityId, { name, usedDate });
+  res.json(amenity);
+}
+);
+
+app.delete('/amenity/:amenityId', async (req, res) => {
+  const { amenityId } = req.params;
+  await amenity.deleteAmenity(amenityId);
+  res.json({ message: 'Amenity deleted successfully' });
+}
+);
+
+// Service
+app.post('/service', async (req, res) => {
+  const { profileId, serviceId, serviceName, serviceMan, subscription } = req.body;
+  const service = await service.createService(profileId, serviceId, serviceName, serviceMan, subscription);
+  res.json(service);
+});
+
+app.get('/service/:profileId', async (req, res) => {
+  const { profileId } = req.params;
+  const services = await service.getServicesByProfileId(profileId);
+  res.json(services);
+}
+);
+
+app.put('/service/:serviceId', async (req, res) => {
+  const { serviceId } = req.params;
+  const { serviceName, serviceMan, subscription } = req.body;
+  const service = await service.updateService(serviceId, { serviceName, serviceMan, subscription });
+  res.json(service);
+}
+);
+
+app.delete('/service/:serviceId', async (req, res) => {
+  const { serviceId } = req.params;
+  await service.deleteService(serviceId);
+  res.json({ message: 'Service deleted successfully' });
+}
+);
+
+// Repair
+app.post('/repair', async (req, res) => {
+  const { profileId, applianceName, repairPerson } = req.body;
+  const repair = await repair.createRepair(profileId, applianceName, repairPerson);
+  res.json(repair);
+});
+
+app.get('/repair/:profileId', async (req, res) => {
+  const { profileId } = req.params;
+  const repairs = await repair.getRepairsByProfileId(profileId);
+  res.json(repairs);
+}
+);
+
+app.put('/repair/:repairId', async (req, res) => {
+  const { repairId } = req.params;
+  const { applianceName, repairPerson } = req.body;
+  const repair = await repair.updateRepair(repairId, { applianceName, repairPerson });
+  res.json(repair);
+}
+);
+
+app.delete('/repair/:repairId', async (req, res) => {
+  const { repairId } = req.params;
+  await repair.deleteRepair(repairId);
+  res.json({ message: 'Repair deleted successfully' });
+}
+);
+
+// Visitor
+app.post('/visitor', async (req, res) => {
+  const { profileId, visitorId, name, phoneNumber, visitDate } = req.body;
+  const visitor = await visitor.createVisitor(profileId, visitorId, name, phoneNumber, visitDate);
+  res.json(visitor);
+});
+
+app.get('/visitor/:profileId', async (req, res) => {
+  const { profileId } = req.params;
+  const visitors = await visitor.getVisitorsByProfileId(profileId);
+  res.json(visitors);
+}
+);
+
+
+app.put('/visitor/:visitorId', async (req, res) => {
+  const { visitorId } = req.params;
+  const { name, phoneNumber, visitDate } = req.body;
+  const visitor = await visitor.updateVisitor(visitorId, { name, phoneNumber, visitDate });
+  res.json(visitor);
+}
+);
+
+app.delete('/visitor/:visitorId', async (req, res) => {
+  const { visitorId } = req.params;
+  await visitor.deleteVisitor(visitorId);
+  res.json({ message: 'Visitor deleted successfully' });
+}
+);
+
+// Events
+
+app.post('/events', async (req, res) => {
+  const { profileId, eventName, eventDateTime, eventType } = req.body;
+  const event = await events.createEvent(profileId, eventName, eventDateTime, eventType);
+  res.json(event);
+}
+);
+
+app.get('/events/:profileId', async (req, res) => {
+  const { profileId } = req.params;
+  const events = await events.getEventsByProfileId(profileId);
+  res.json(events);
+}
+);
+
+app.put('/events/:eventId', async (req, res) => {
+  const { eventId } = req.params;
+  const { eventName, eventDateTime, eventType } = req.body;
+  const event = await events.updateEvent(eventId, { eventName, eventDateTime, eventType });
+  res.json(event);
+}
+);
+
+app.delete('/events/:eventId', async (req, res) => {
+  const { eventId } = req.params;
+  await events.deleteEvent(eventId);
+  res.json({ message: 'Event deleted successfully' });
+}
+);
+
 
 
 app.listen(port, () => {
