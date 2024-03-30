@@ -61,10 +61,6 @@ npm start
 
 ---
 
-![ER Diagram](https://github.com/Naveen-g09/Residentron-Backend/assets/76151123/688061b0-e828-492a-bc08-ff0e62241f0c)
-
----
-
 ```mermaid
 erDiagram
   AUTH ||--o{ PROFILE : has
