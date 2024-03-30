@@ -54,6 +54,7 @@ npm start
 
 ![image](https://github.com/Naveen-g09/Residentron-Backend/assets/76151123/688061b0-e828-492a-bc08-ff0e62241f0c)
 
+
 ---
 
 ```mermaid
@@ -139,7 +140,61 @@ erDiagram
     datetime updatedAt
   }
 ```
+---
+
+APIS
 
 ---
 
-![image](https://github.com/Naveen-g09/Residentron-Backend/assets/76151123/688061b0-e828-492a-bc08-ff0e62241f0c)
+- Welcome Message: http://localhost/
+- Authentication Endpoints:
+  - POST: http://localhost/auth
+  - GET (by username): http://localhost/auth/:username
+  - GET (by email): http://localhost/auth/email/:email
+  - PUT: http://localhost/auth/:username
+  - DELETE: http://localhost/auth/:username
+- Profile Endpoints:
+  - POST: http://localhost/profile
+  - GET (by email): http://localhost/profile/:email
+  - GET (by id): http://localhost/profile/id/:id
+  - PUT: http://localhost/profile/:id
+  - DELETE: http://localhost/profile/:id
+- Transaction Endpoints:
+  - POST: http://localhost/transaction
+  - GET (by profileId): http://localhost/transaction/:profileId
+  - PUT: http://localhost/transaction/:transactionId
+  - DELETE: http://localhost/transaction/:transactionId
+- Utility Endpoints:
+  - POST: http://localhost/utility
+  - GET (by profileId): http://localhost/utility/:profileId
+  - PUT: http://localhost/utility/:utilityId
+  - DELETE: http://localhost/utility/:utilityId
+- Amenity Endpoints:
+  - POST: http://localhost/amenity
+  - GET (by profileId): http://localhost/amenity/:profileId
+  - PUT: http://localhost/amenity/:amenityId
+  - DELETE: http://localhost/amenity/:amenityId
+- Service Endpoints:
+  - POST: http://localhost/service
+  - GET (by profileId): http://localhost/service/:profileId
+  - PUT: http://localhost/service/:serviceId
+  - DELETE: http://localhost/service/:serviceId
+- Repair Endpoints:
+  - POST: http://localhost/repair
+  - GET (by profileId): http://localhost/repair/:profileId
+  - PUT: http://localhost/repair/:repairId
+  - DELETE: http://localhost/repair/:repairId
+- Visitor Endpoints:
+  - POST: http://localhost/visitor
+  - GET (by profileId): http://localhost/visitor/:profileId
+  - PUT: http://localhost/visitor/:visitorId
+  - DELETE: http://localhost/visitor/:visitorId
+- Events Endpoints:
+  - POST: http://localhost/events
+  - GET (by profileId): http://localhost/events/:profileId
+  - PUT: http://localhost/events/:eventId
+  - DELETE: http://localhost/events/:eventId
+
+
+in the place of  lcoalhost use this url: https://96b5-103-136-175-206.ngrok-free.app/
+
