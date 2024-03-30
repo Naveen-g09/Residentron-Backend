@@ -1,6 +1,3 @@
-Here's the updated README.md file with all the features and details included:
-
-```markdown
 # Residentron-Backend
 
 This is the backend for the Residentron project, an integrated housing society app for managing users and community-related activities.
