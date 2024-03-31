@@ -4,7 +4,7 @@ const pg = require('pg');
 const cors = require('cors'); // Corrected import
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5500;
 const auth = require('./tables/auth');
 const profile = require('./tables/profile');
 const transaction = require('./tables/transaction');
@@ -23,7 +23,7 @@ db.connect()
   .then(() => console.log('Connected to the database'))
   .catch(err => console.error('Error connecting to the database', err.stack));
 
-  // Error handling middleware
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: 'Internal server error' });
@@ -312,8 +312,54 @@ app.delete('/events/:eventId', async (req, res) => {
 }
 );
 
+// Create
+app.post('/varsha_a', async (req, res) => {
+  const { roomNumber, name, ownershipType, parking } = req.body;
+  const record = await varshaA.createVarshaA(roomNumber, name, ownershipType, parking);
+  res.json(record);
+});
+
+// Read
+app.get('/varsha_a/:id', async (req, res) => {
+  const { id } = req.params;
+  const record = await varshaA.getVarshaAById(id);
+  res.json(record);
+});
+
+// Update
+app.put('/varsha_a/:id', async (req, res) => {
+  const { id } = req.params;
+  const { roomNumber, name, ownershipType, parking } = req.body;
+  const record = await varshaA.updateVarshaA(id, roomNumber, name, ownershipType, parking);
+  res.json(record);
+});
+
+// Delete
+app.delete('/varsha_a/:id', async (req, res) => {
+  const { id } = req.params;
+  await varshaA.deleteVarshaA(id);
+  res.json({ message: 'Record deleted successfully' });
+});
+
+const varshaA = require('./tables/varsha_a'); // Corrected require statement
+
+// Update the route to get all Varsha data
+app.get('/varsha_a', async (req, res) => { // Corrected route path
+  try {
+    // Call the function to fetch all Varsha data
+    const allVarshaData = await varshaA.getAllVarshaA(); // Corrected function name
+
+    // Send the fetched data as a JSON response
+    res.json(allVarshaData);
+  } catch (error) {
+    // Handle errors if any
+    console.error('Error fetching Varsha data:', error);
+    res.status(500).json({ message: 'Failed to fetch Varsha data' });
+  }
+});
 
 
+// Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
