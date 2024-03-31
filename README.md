@@ -203,16 +203,12 @@ erDiagram
   - DELETE: residentron/events/:eventId
 ```
 
-
-```
-Sure, here's the documentation for the endpoints related to wings A, B, C, and D:
-
 ### Wing A Endpoints:
 
 1. **Create a Wing A Record**
    - **Description:** Creates a new record for Wing A.
    - **Method:** `POST`
-   - **URL:** `/a`
+   - **URL:** `/varsha_a`
    - **Body Parameters:**
      - `roomNumber` (string): Room number of the record.
      - `name` (string): Name associated with the record.
@@ -223,7 +219,7 @@ Sure, here's the documentation for the endpoints related to wings A, B, C, and D
 2. **Get Wing A Record by ID**
    - **Description:** Retrieves a Wing A record by its ID.
    - **Method:** `GET`
-   - **URL:** `/a/:id`
+   - **URL:** `/varsha_a/:id`
    - **URL Parameters:**
      - `id` (string): ID of the record to retrieve.
    - **Response:** JSON object representing the requested record.
@@ -231,7 +227,7 @@ Sure, here's the documentation for the endpoints related to wings A, B, C, and D
 3. **Get Wing A Record by Room Number**
    - **Description:** Retrieves Wing A records by room number.
    - **Method:** `GET`
-   - **URL:** `/a/room/:roomNumber`
+   - **URL:** `/varsha_a/room/:roomNumber`
    - **URL Parameters:**
      - `roomNumber` (string): Room number to search for.
    - **Response:** JSON array of records matching the room number.
@@ -239,7 +235,7 @@ Sure, here's the documentation for the endpoints related to wings A, B, C, and D
 4. **Get Wing A Record by Name**
    - **Description:** Retrieves Wing A records by name.
    - **Method:** `GET`
-   - **URL:** `/a/name/:name`
+   - **URL:** `/varsha_a/name/:name`
    - **URL Parameters:**
      - `name` (string): Name to search for.
    - **Response:** JSON array of records matching the name.
@@ -247,7 +243,7 @@ Sure, here's the documentation for the endpoints related to wings A, B, C, and D
 5. **Get Wing A Record by Ownership Type**
    - **Description:** Retrieves Wing A records by ownership type.
    - **Method:** `GET`
-   - **URL:** `/a/ownership/:ownershipType`
+   - **URL:** `/varsha_a/ownership/:ownershipType`
    - **URL Parameters:**
      - `ownershipType` (string): Type of ownership to filter by.
    - **Response:** JSON array of records matching the ownership type.
@@ -255,13 +251,13 @@ Sure, here's the documentation for the endpoints related to wings A, B, C, and D
 6. **Get All Wing A Records**
    - **Description:** Retrieves all Wing A records.
    - **Method:** `GET`
-   - **URL:** `/a`
+   - **URL:** `/varsha_a`
    - **Response:** JSON array of all Wing A records.
 
 7. **Update Wing A Record**
    - **Description:** Updates an existing Wing A record.
    - **Method:** `PUT`
-   - **URL:** `/a/:id`
+   - **URL:** `/varsha_a/:id`
    - **URL Parameters:**
      - `id` (string): ID of the record to update.
    - **Body Parameters:**
@@ -271,14 +267,14 @@ Sure, here's the documentation for the endpoints related to wings A, B, C, and D
 8. **Delete Wing A Record**
    - **Description:** Deletes a Wing A record.
    - **Method:** `DELETE`
-   - **URL:** `/a/:id`
+   - **URL:** `/varsha_a/:id`
    - **URL Parameters:**
      - `id` (string): ID of the record to delete.
    - **Response:** JSON object confirming the deletion.
 
 ### Wing B, C, and D Endpoints:
 
-The endpoints for wings B, C, and D follow the same structure as those for Wing A, with the only difference being the base URL path. Replace `/a` in the above endpoint URLs with `/b`, `/c`, or `/d` respectively for wings B, C, or D.
+The endpoints for wings B, C, and D follow the same structure as those for Wing A, with the only difference being the base URL path. Replace `/varsha_a` in the above endpoint URLs with `/b`, `/c`, or `/d` respectively for wings B, C, or D.
 
 ### Disclaimer:
 
@@ -324,15 +320,15 @@ Sure, here are the links directly to each endpoint:
 
 ### Wing B Endpoints:
 
-Replace `/a` with `/b` in the above URLs for Wing B.
+Replace `/varsha_a` with `/varsha_b` in the above URLs for Wing B.
 
 ### Wing C Endpoints:
 
-Replace `/a` with `/c` in the above URLs for Wing C.
+Replace `/varsha_a` with `/varsha_c` in the above URLs for Wing C.
 
 ### Wing D Endpoints:
 
-Replace `/a` with `/d` in the above URLs for Wing D.
+Replace `/varsha_a` with `/varsha_d` in the above URLs for Wing D.
 
 ### Disclaimer:
 
