@@ -358,6 +358,216 @@ app.get('/varsha_a', async (req, res) => { // Corrected route path
   }
 });
 
+// Import varsha_b module
+const varshaB = require('./tables/varsha_b');
+
+// Create
+app.post('/varsha_b', async (req, res) => {
+  const { roomNumber, name, ownershipType, parking } = req.body;
+  const record = await varshaB.createVarshaB(roomNumber, name, ownershipType, parking);
+  res.json(record);
+});
+
+// Read
+app.get('/varsha_b/:id', async (req, res) => {
+  const { id } = req.params;
+  const record = await varshaB.getVarshaBById(id);
+  res.json(record);
+});
+
+// Get by room number
+app.get('/varsha_b/roomNumber/:roomNumber', async (req, res) => {
+  const { roomNumber } = req.params;
+  const records = await varshaB.getVarshaBByRoomNumber(roomNumber);
+  res.json(records);
+});
+
+// Get by name
+app.get('/varsha_b/name/:name', async (req, res) => {
+  const { name } = req.params;
+  const records = await varshaB.getVarshaBByName(name);
+  res.json(records);
+});
+
+// Get by ownership type
+app.get('/varsha_b/ownershipType/:ownershipType', async (req, res) => {
+  const { ownershipType } = req.params;
+  const records = await varshaB.getVarshaBByOwnershipType(ownershipType);
+  res.json(records);
+});
+
+// Get all
+app.get('/varsha_b', async (req, res) => {
+  try {
+    const allRecords = await varshaB.getAllVarshaB();
+    res.json(allRecords);
+  } catch (error) {
+    console.error('Error fetching varsha b data:', error);
+    res.status(500).json({ message: 'Failed to fetch varsha b data' });
+  }
+});
+
+const varshaCWing = require('./tables/varsha_c'); // Import varsha_c_wing module
+
+// Create varsha_c_wing record
+app.post('/varsha_c', async (req, res) => {
+  const { roomNumber, name, ownershipType, parking } = req.body;
+  const record = await varshaCWing.createVarshaCWing(roomNumber, name, ownershipType, parking);
+  res.json(record);
+});
+
+// Read varsha_c_wing record by ID
+app.get('/varsha_c/:id', async (req, res) => {
+  const { id } = req.params;
+  const record = await varshaCWing.getVarshaCWingById(id);
+  res.json(record);
+});
+
+// Get varsha_c_wing record by room number
+app.get('/varsha_c/room/:roomNumber', async (req, res) => {
+  const { roomNumber } = req.params;
+  const record = await varshaCWing.getVarshaCWingByRoomNumber(roomNumber);
+  res.json(record);
+});
+
+// Get varsha_c_wing record by name
+app.get('/varsha_c/name/:name', async (req, res) => {
+  const { name } = req.params;
+  const record = await varshaCWing.getVarshaCWingByName(name);
+  res.json(record);
+});
+
+// Get varsha_c_wing record by ownership type
+app.get('/varsha_c/ownership/:ownershipType', async (req, res) => {
+  const { ownershipType } = req.params;
+  const record = await varshaCWing.getVarshaCWingByOwnershipType(ownershipType);
+  res.json(record);
+});
+
+// Get all varsha_c_wing records
+app.get('/varsha_c', async (req, res) => {
+  try {
+    const allRecords = await varshaCWing.getAllVarshaCWing();
+    res.json(allRecords);
+  } catch (error) {
+    console.error('Error fetching varsha_c data:', error);
+    res.status(500).json({ message: 'Failed to fetch varsha_c_wing data' });
+  }
+});
+
+// Update varsha_c record
+app.put('/varsha_c_wing/:id', async (req, res) => {
+  const { id } = req.params;
+  const { roomNumber, name, ownershipType, parking } = req.body;
+  const record = await varshaCWing.updateVarshaCWing(id, roomNumber, name, ownershipType, parking);
+  res.json(record);
+});
+
+// Delete varsha_c_wing record
+app.delete('/varsha_c/:id', async (req, res) => {
+  const { id } = req.params;
+  await varshaCWing.deleteVarshaCWing(id);
+  res.json({ message: 'Record deleted successfully' });
+});
+
+const varshaD = require('./tables/varsha_d');
+
+
+// Create varsha_d_wing record
+app.post('/varsha_d', async (req, res) => {
+  const { roomNumber, name, ownershipType, parking } = req.body;
+  try {
+    const record = await varshaD.createVarshaDWing(roomNumber, name, ownershipType, parking);
+    res.json(record);
+  } catch (error) {
+    console.error('Error creating varsha_d_wing record:', error);
+    res.status(500).json({ message: 'Failed to create varsha_d_wing record' });
+  }
+});
+
+// Read varsha_d_wing record by ID
+app.get('/varsha_d/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const record = await varshaD.getVarshaDWingById(id);
+    res.json(record);
+  } catch (error) {
+    console.error('Error fetching varsha_d_wing record by ID:', error);
+    res.status(500).json({ message: 'Failed to fetch varsha_d_wing record' });
+  }
+});
+
+// Get varsha_d_wing record by room number
+app.get('/varsha_d/room/:roomNumber', async (req, res) => {
+  const { roomNumber } = req.params;
+  try {
+    const record = await varshaD.getVarshaDWingByRoomNumber(roomNumber);
+    res.json(record);
+  } catch (error) {
+    console.error('Error fetching varsha_d_wing record by room number:', error);
+    res.status(500).json({ message: 'Failed to fetch varsha_d_wing record' });
+  }
+});
+
+// Get varsha_d_wing record by name
+app.get('/varsha_d/name/:name', async (req, res) => {
+  const { name } = req.params;
+  try {
+    const record = await varshaD.getVarshaDWingByName(name);
+    res.json(record);
+  } catch (error) {
+    console.error('Error fetching varsha_d_wing record by name:', error);
+    res.status(500).json({ message: 'Failed to fetch varsha_d_wing record' });
+  }
+});
+
+// Get varsha_d_wing record by ownership type
+app.get('/varsha_d/ownership/:ownershipType', async (req, res) => {
+  const { ownershipType } = req.params;
+  try {
+    const record = await varshaD.getVarshaDWingByOwnershipType(ownershipType);
+    res.json(record);
+  } catch (error) {
+    console.error('Error fetching varsha_d_wing record by ownership type:', error);
+    res.status(500).json({ message: 'Failed to fetch varsha_d_wing record' });
+  }
+});
+
+// Get all varsha_d_wing records
+app.get('/varsha_d', async (req, res) => {
+  try {
+    const allRecords = await varshaD.getAllVarshaDWing();
+    res.json(allRecords);
+  } catch (error) {
+    console.error('Error fetching all varsha_d_wing records:', error);
+    res.status(500).json({ message: 'Failed to fetch varsha_d_wing records' });
+  }
+});
+
+// Update varsha_d_wing record
+app.put('/varsha_d/:id', async (req, res) => {
+  const { id } = req.params;
+  const { roomNumber, name, ownershipType, parking } = req.body;
+  try {
+    const record = await varshaD.updateVarshaDWing(id, roomNumber, name, ownershipType, parking);
+    res.json(record);
+  } catch (error) {
+    console.error('Error updating varsha_d_wing record:', error);
+    res.status(500).json({ message: 'Failed to update varsha_d_wing record' });
+  }
+});
+
+// Delete varsha_d_wing record
+app.delete('/varsha_d/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    await varshaD.deleteVarshaDWing(id);
+    res.json({ message: 'Record deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting varsha_d_wing record:', error);
+    res.status(500).json({ message: 'Failed to delete varsha_d_wing record' });
+  }
+});
 
 // Start the server
 app.listen(port, () => {
