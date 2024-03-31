@@ -1,4 +1,3 @@
-```markdown
 # Residentron-Backend
 
 This is the backend for the Residentron project, an integrated housing society app for managing users and community-related activities.
@@ -24,24 +23,27 @@ These instructions will help you set up and run the Residentron-Backend on your 
 - [Node.js](https://nodejs.org/) installed
 - yarn installed
 
-### Installation
+### Installing
 
-1. **Clone the repository:**
+1. Clone the repository:
+
     ```bash
     git clone https://github.com/Naveen-g09/Residentron-Backend.git
     cd Residentron-Backend
     ```
 
-2. **Install dependencies:**
+2. Install dependencies:
+
     ```bash
     npm install
     ```
 
-3. **[Additional steps, if any]**
+3. [Additional steps, if any]
 
 ### Running
 
 Start the server:
+
 ```bash
 npm start
 ```
@@ -55,18 +57,99 @@ npm start
 5. Docker
 6. AWS
 
-### Database Design
+### DB DESIGN
 
-The entity-relationship diagram (ERD) is provided below:
+---
 
 ```mermaid
 erDiagram
-  ... [Database schema goes here]
+  AUTH ||--o{ PROFILE : has
+  PROFILE ||--o{ TRANSACTION : has
+  PROFILE ||--o{ UTILITY : has
+  PROFILE ||--o{ AMENITIES : has
+  PROFILE ||--o{ SERVICES : has
+  PROFILE ||--o{ REPAIR : has
+  PROFILE ||--o{ VISITORS : has
+  PROFILE ||--o{ EVENTS : has
+  AUTH {
+    int id PK "primary, auto increment"
+    string username
+    string password "encrypted"
+    string email
+  }
+  PROFILE {
+    int id PK "primary, auto increment"
+    string name
+    string email
+    string password "encrypted"
+    string phoneNumber
+    datetime createdAt
+    datetime updatedAt
+  }
+  TRANSACTION {
+    int profile_id FK
+    string transaction_id
+    float amount
+    datetime createdDate
+  }
+  UTILITY {
+    int profile_id FK
+    string utility_id
+    date usedDate
+    string name
+    datetime createdAt
+    datetime updatedAt
+  }
+  AMENITIES {
+    int profile_id FK
+    string amenityName
+    date bookingDate
+    time time
+    datetime createdAt
+    datetime editedAt
+  }
+  SERVICES {
+    int profile_id FK
+    string serviceId
+    string serviceName
+    string serviceMan
+    boolean subscription
+    datetime createdAt
+    datetime updatedAt
+    datetime cancelledAt
+  }
+  REPAIR {
+    int profile_id FK
+    string applianceToRepair
+    string repairPerson
+    datetime createdAt
+    datetime cancelledAt
+  }
+  VISITORS {
+    int profile_id FK
+    string visitorName
+    string visitorContact
+    time visitorInTime
+    time visitorOutTime
+    string visitorVehicle
+    datetime createTime
+    datetime updateTime
+  }
+  EVENTS {
+    int profile_id FK
+    datetime createdAt
+    string eventName
+    datetime eventDateTime
+    string eventType
+    datetime updatedAt
+  }
 ```
 
-### API Endpoints
+---
 
-#### Residentron Endpoints
+## APIS
+
+---
 
 - Welcome Message: residentron/
 - Authentication Endpoints:
@@ -103,7 +186,9 @@ erDiagram
   - DELETE: residentron/service/:serviceId
 - Repair Endpoints:
   - POST: residentron/repair
-  - GET (by profileId): residentron/repair/:profileId
+  - GET (by profileId): https://96b5-103-136-175-206
+
+.ngrok-free.app/repair/:profileId
   - PUT: residentron/repair/:repairId
   - DELETE: residentron/repair/:repairId
 - Visitor Endpoints:
@@ -116,29 +201,139 @@ erDiagram
   - GET (by profileId): residentron/events/:profileId
   - PUT: residentron/events/:eventId
   - DELETE: residentron/events/:eventId
-
-#### Wing Endpoints
-
-For each wing (A, B, C, D), the following endpoints are available:
-
-1. **Create a Wing Record**
-2. **Get Wing Record by ID**
-3. **Get Wing Record by Room Number**
-4. **Get Wing Record by Name**
-5. **Get Wing Record by Ownership Type**
-6. **Get All Wing Records**
-7. **Update Wing Record**
-8. **Delete Wing Record**
-
-Endpoints for each wing are accessible under the following URLs:
-
-- Wing A: [localhost/a](http://localhost/a)
-- Wing B: [localhost/b](http://localhost/b)
-- Wing C: [localhost/c](http://localhost/c)
-- Wing D: [localhost/d](http://localhost/d)
-
-### Disclaimer
-
-Replace `localhost` in the URLs provided above with the actual secret URL provided for accessing the application.
 ```
 
+
+```
+Sure, here's the documentation for the endpoints related to wings A, B, C, and D:
+
+### Wing A Endpoints:
+
+1. **Create a Wing A Record**
+   - **Description:** Creates a new record for Wing A.
+   - **Method:** `POST`
+   - **URL:** `/a`
+   - **Body Parameters:**
+     - `roomNumber` (string): Room number of the record.
+     - `name` (string): Name associated with the record.
+     - `ownershipType` (string): Type of ownership.
+     - `parking` (boolean): Availability of parking.
+   - **Response:** JSON object representing the newly created record.
+
+2. **Get Wing A Record by ID**
+   - **Description:** Retrieves a Wing A record by its ID.
+   - **Method:** `GET`
+   - **URL:** `/a/:id`
+   - **URL Parameters:**
+     - `id` (string): ID of the record to retrieve.
+   - **Response:** JSON object representing the requested record.
+
+3. **Get Wing A Record by Room Number**
+   - **Description:** Retrieves Wing A records by room number.
+   - **Method:** `GET`
+   - **URL:** `/a/room/:roomNumber`
+   - **URL Parameters:**
+     - `roomNumber` (string): Room number to search for.
+   - **Response:** JSON array of records matching the room number.
+
+4. **Get Wing A Record by Name**
+   - **Description:** Retrieves Wing A records by name.
+   - **Method:** `GET`
+   - **URL:** `/a/name/:name`
+   - **URL Parameters:**
+     - `name` (string): Name to search for.
+   - **Response:** JSON array of records matching the name.
+
+5. **Get Wing A Record by Ownership Type**
+   - **Description:** Retrieves Wing A records by ownership type.
+   - **Method:** `GET`
+   - **URL:** `/a/ownership/:ownershipType`
+   - **URL Parameters:**
+     - `ownershipType` (string): Type of ownership to filter by.
+   - **Response:** JSON array of records matching the ownership type.
+
+6. **Get All Wing A Records**
+   - **Description:** Retrieves all Wing A records.
+   - **Method:** `GET`
+   - **URL:** `/a`
+   - **Response:** JSON array of all Wing A records.
+
+7. **Update Wing A Record**
+   - **Description:** Updates an existing Wing A record.
+   - **Method:** `PUT`
+   - **URL:** `/a/:id`
+   - **URL Parameters:**
+     - `id` (string): ID of the record to update.
+   - **Body Parameters:**
+     - Same as in "Create a Wing A Record" endpoint.
+   - **Response:** JSON object representing the updated record.
+
+8. **Delete Wing A Record**
+   - **Description:** Deletes a Wing A record.
+   - **Method:** `DELETE`
+   - **URL:** `/a/:id`
+   - **URL Parameters:**
+     - `id` (string): ID of the record to delete.
+   - **Response:** JSON object confirming the deletion.
+
+### Wing B, C, and D Endpoints:
+
+The endpoints for wings B, C, and D follow the same structure as those for Wing A, with the only difference being the base URL path. Replace `/a` in the above endpoint URLs with `/b`, `/c`, or `/d` respectively for wings B, C, or D.
+
+### Disclaimer:
+
+Replace `residentron/` with the actual URL where your backend server is hosted.
+In the place of residentron use this url: https://96b5-103-136-175-206.ngrok-free.app
+
+
+Sure, here are the links directly to each endpoint:
+
+### Wing A Endpoints:
+
+1. **Create a Wing A Record**
+   - **Method:** `POST`
+   - **URL:** [localhost/a](http://localhost/a)
+   
+2. **Get Wing A Record by ID**
+   - **Method:** `GET`
+   - **URL:** [localhost/a/:id](http://localhost/a/:id)
+   
+3. **Get Wing A Record by Room Number**
+   - **Method:** `GET`
+   - **URL:** [localhost/a/room/:roomNumber](http://localhost/a/room/:roomNumber)
+   
+4. **Get Wing A Record by Name**
+   - **Method:** `GET`
+   - **URL:** [localhost/a/name/:name](http://localhost/a/name/:name)
+   
+5. **Get Wing A Record by Ownership Type**
+   - **Method:** `GET`
+   - **URL:** [localhost/a/ownership/:ownershipType](http://localhost/a/ownership/:ownershipType)
+   
+6. **Get All Wing A Records**
+   - **Method:** `GET`
+   - **URL:** [localhost/a](http://localhost/a)
+   
+7. **Update Wing A Record**
+   - **Method:** `PUT`
+   - **URL:** [localhost/a/:id](http://localhost/a/:id)
+   
+8. **Delete Wing A Record**
+   - **Method:** `DELETE`
+   - **URL:** [localhost/a/:id](http://localhost/a/:id)
+
+### Wing B Endpoints:
+
+Replace `/a` with `/b` in the above URLs for Wing B.
+
+### Wing C Endpoints:
+
+Replace `/a` with `/c` in the above URLs for Wing C.
+
+### Wing D Endpoints:
+
+Replace `/a` with `/d` in the above URLs for Wing D.
+
+### Disclaimer:
+
+Please replace `localhost` in the URLs provided above with the actual secret URL provided for accessing the application.
