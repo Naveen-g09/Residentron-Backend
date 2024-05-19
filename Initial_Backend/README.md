@@ -201,7 +201,8 @@ erDiagram
   - GET (by profileId): residentron/events/:profileId
   - PUT: residentron/events/:eventId
   - DELETE: residentron/events/:eventId
-```
+
+---
 
 ### Wing A Endpoints:
 
