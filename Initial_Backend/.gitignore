@@ -17,3 +17,5 @@ env/
 
 # secrets
 infra/secrets/*
+
+node_modules/
