@@ -3,3 +3,6 @@ build
 node_modules
 secrets.json
 .env
+
+dist
+.dist

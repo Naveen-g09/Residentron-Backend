@@ -15,5 +15,6 @@ io.on("connection", (socket) => {
 
 });
 
+console.log("Server running on port 3000");
 io.listen(3000);
 
