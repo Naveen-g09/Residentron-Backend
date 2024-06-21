@@ -1,0 +1,5 @@
+.dapr
+build
+node_modules
+secrets.json
+.env
