@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "socket.io": "^4.7.5"
   }
 }
