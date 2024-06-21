@@ -15,5 +15,7 @@ __pycache__/
 env/
 *.ini
 
+node_modules/
+
 # secrets
 infra/secrets/*
