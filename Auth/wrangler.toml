@@ -1,21 +1,7 @@
-name = "auth"
+name = "residentron"
 compatibility_date = "2023-12-01"
 
-# [vars]
-# MY_VAR = "my-variable"
+[vars]
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiNzZmZThmYjYtMjMxYy00MDBjLThmZTctODMwYTZkMGRjOWEyIiwidGVuYW50X2lkIjoiNTM1NzVmNTdlMTliYjA0OGJlMTMxYjZhMzM4ODE4N2RmMWVhY2Y5ODZjNDNiM2Y1ZTc0Yjk2ZjViMmE0YTQyOSIsImludGVybmFsX3NlY3JldCI6IjFjOTlhMDdkLTI4YzEtNDc5MC1iOTNkLTQ0OTJhNDgxZTBkMSJ9.peeqrlGYLgxXdNEJTYCuRdzRPjqeKJVJEvzTlSkjTE4"
 
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
-# [[r2_buckets]]
-# binding = "MY_BUCKET"
-# bucket_name = "my-bucket"
-
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "my-database"
-# database_id = ""
-
-# [ai]
-# binding = "AI"
+JWT_SECRET="Residentron"
