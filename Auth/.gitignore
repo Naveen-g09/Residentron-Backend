@@ -16,7 +16,7 @@ node_modules/
 .wrangler
 .wrangler.toml
 wrangler.toml
-
+/wrangler.toml
 
 # env
 .env
