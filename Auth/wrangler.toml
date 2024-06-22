@@ -1,1 +1,7 @@
-name
+name = "residentron"
+compatibility_date = "2023-12-01"
+
+[vars]
+DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiNzZmZThmYjYtMjMxYy00MDBjLThmZTctODMwYTZkMGRjOWEyIiwidGVuYW50X2lkIjoiNTM1NzVmNTdlMTliYjA0OGJlMTMxYjZhMzM4ODE4N2RmMWVhY2Y5ODZjNDNiM2Y1ZTc0Yjk2ZjViMmE0YTQyOSIsImludGVybmFsX3NlY3JldCI6IjFjOTlhMDdkLTI4YzEtNDc5MC1iOTNkLTQ0OTJhNDgxZTBkMSJ9.peeqrlGYLgxXdNEJTYCuRdzRPjqeKJVJEvzTlSkjTE4"
+
+JWT_SECRET="Residentron"
