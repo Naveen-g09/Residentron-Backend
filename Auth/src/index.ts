@@ -10,7 +10,7 @@ const app = new Hono<{
 }>();
 app.use('/*', cors())
 app.get('/', (c) => {
-  return c.text('Welcome to the naveen-g09 Medium blog API')
+  return c.text('Welcome to Residentron')
 });
 app.route("/api/v1/user", userRouter);
 
