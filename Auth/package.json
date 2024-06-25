@@ -7,7 +7,9 @@
     "@naveen-g09/zod-medium-types": "^1.0.1",
     "@prisma/client": "^5.15.1",
     "@prisma/extension-accelerate": "^1.1.0",
-    "hono": "^4.4.7"
+    "@types/jsonwebtoken": "^9.0.6",
+    "hono": "^4.4.7",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240403.0",
